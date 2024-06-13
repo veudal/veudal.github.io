@@ -5,5 +5,13 @@ import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "d/:guid", component: DComponent}
+  { path: "d/:guid", component: DComponent }
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
