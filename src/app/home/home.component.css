@@ -1,0 +1,62 @@
+h1 {
+  font-size: 3.5rem;
+  color: teal;
+  font-weight: 700;
+  letter-spacing: -0.125rem;
+}
+
+main {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: inherit;
+  position: relative;
+}
+
+progress {
+    background-color: red;
+}
+
+.logo {
+  width: 10rem;
+  position: absolute;
+}
+
+#accessKey {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 3rem;
+}
+
+.content h1 {
+   margin-top: 1.75rem;
+}
+
+.content p {
+    margin-top: 1.5rem;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  transition: width 0.3s ease;
+  background-color: #5217ff;
+}
+
+@media (max-height: 560px) {
+  #accessKey {
+    display: none;
+  }
+}

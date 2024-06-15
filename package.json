@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --host=127.0.0.1",
     "build": "ng build",
+    "build:prod": "bash scripts/build_prod.sh",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

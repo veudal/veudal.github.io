@@ -1,68 +1,11 @@
-<style>
-  h1 {
-    font-size: 3.5rem;
-    color: teal;
-    font-weight: 700;
-    letter-spacing: -0.125rem;
-  }
-
-  p {
-    margin: 0;
-    color: var(--gray-700);
-  }
-
-  main {
-    width: 100%;
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: inherit;
-    position: relative;
-  }
-
-  .logo {
-    width: 15rem;
-    position: absolute;
-  }
-
-  .content {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    max-width: 700px;
-    margin-bottom: 3rem;
-  }
-
-    .content h1 {
-      margin-top: 1.75rem;
-    }
-
-    .content p {
-      margin-top: 1.5rem;
-    }
-
-  .divider {
-    width: 1px;
-    background: var(--red-to-pink-to-purple-vertical-gradient);
-    margin-inline: 0.5rem;
-  }
-</style>
-
-
-
-<main id="main" class="main">
-  <!--<nav>
-    <a class="button" routerLink="/d/myCustomID">Download</a>
-  </nav>-->
+<main id="main">
   <div class="content">
-    <img class="logo left-5" src="../assets/logo.jpg" alt="Logo"/>
-    <div class="flex items-center min-h-[350px] gap-x-6">
+    <img class="logo left-5" src="../assets/logo.jpg" alt="Logo" />
+    <div class="flex items-center gap-x-6">
       <div>
-        <h1 class="text-center relative z-1 top-5">Filehost Service</h1>
-        <div class=" flex flex-col items-center px-10 pt-[30px] pb-[30px] mt-10 bg-gray-100 rounded-3xl">
-          <div class="relative flex flex-col outline-gray-500 outline-2 -outline-offset-4 outline-dashed w-[350px] h-[350px] rounded-2xl items-center justify-center">
+        <h1 class="text-center relative z-1">Filehost Service</h1>
+        <div class=" flex flex-col items-center px-10 pt-[30px] pb-[30px] mt-6 bg-gray-100 rounded-3xl">
+          <div class="relative flex flex-col outline-gray-500 outline-2 -outline-offset-4 outline-dashed w-[300px] h-[280px] rounded-2xl items-center justify-center">
             <input #fileInput
                    type="file"
                    (change)="handleChange($event)"
@@ -86,21 +29,21 @@
             </button>
           </div>
           <div [ngStyle]="{ 'background-image': 'url(' + fileUrl + ')' }" *ngIf="fileUrl"
-               class="flex flex-col mt-4 justify-end border w-[350px] h-[300px] rounded-2xl items-center relative bg-cover bg-center overflow-hidden bg-gray-300">
+               class="flex flex-col mt-4 justify-end border w-[300px] h-[280px] rounded-2xl items-center relative bg-cover bg-center overflow-hidden bg-gray-300">
             <div class="flex flex-col w-full bg-white">
               <p class="text-center font-medium text-lg text-gray">{{ uploadFile?.name }}</p>
               <div class="flex justify-center gap-3 mb-3 mt-3 justify-start">
                 <button type="button"
                         [disabled]="isUploading"
                         (click)="handleUploadFile()"
-                        [hidden]="uploadFinished"
+                        [hidden]="successfulUpload"
                         class="text-sm font-medium w-[40%] border border-blue-500 px-4 py-3 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-500">
                   {{ !isUploading ? 'UPLOAD' : 'UPLOADING...'}}
                 </button>
 
                 <button type="button"
                         [disabled]="isUploading"
-                        [hidden]="uploadFinished"
+                        [hidden]="successfulUpload"
                         (click)="handleRemovesFile()"
                         class="text-sm font-medium w-[40%] border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-500">
                   REMOVE
@@ -108,12 +51,17 @@
               </div>
             </div>
           </div>
+          <div [hidden]="!isUploading" class="rounded-2xl h-6 mt-10 w-full bg-gray-300 overflow-hidden">
+            <div id="progressBar" class="progress-bar rounded-2xl" [style.width.%]="percent"></div>
+          </div>
+          <p class="text-red-500 font-bold underline">{{errorMessage}}</p>
+          <button [hidden]="!successfulUpload" (click)="copyLink()" class="mt-5 text-xl weight-bold font-medium px-4 py-3 bg-gray-400 text-blue-50 rounded-lg hover:bg-gray-500 ease-in-out disabled:bg-gray-300">Copy 🔗</button>
+        </div>
+        <div id="accessKey">
+          <p class="font-medium text-center">Access key:</p>
+          <input id="key" type="password" (change)="onChange($event)" class="bg-red-100 mt-1 rounded-lg text-center border-red-500 border" placeholder="Paste key here">
         </div>
       </div>
-      <div class="flex-2">
-        <button [hidden]="!uploadFinished" (click)="copyLink()"  class="text-xl weight-bold font-medium border border-gray-500 px-4 py-3 bg-gray-400 text-blue-50 rounded-lg hover:bg-gray-500 ease-in-out disabled:bg-gray-300">Copy 🔗</button>
-      </div>
     </div>
-    <!--<div class="divider" role="separator" aria-label="Divider"></div>-->
   </div>
 </main>

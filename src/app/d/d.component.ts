@@ -13,9 +13,10 @@ import { ActivatedRoute } from '@angular/router';
 
 export class DComponent {
   isDownloading = false;
-  progress = 0;
+  percent: any;
+  progress = "";
   name = "";
-  size = "";
+  size = ""
   guid: string | null = null;
   data: any;
 
@@ -23,37 +24,53 @@ export class DComponent {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      const btn = document.getElementById("downloadBtn") as HTMLButtonElement
+      btn.disabled = false;
       this.guid = params['guid'];
       const response = fetch("https://file-host.azurewebsites.net/Files/Metadata?guid=" + this.guid).then(response => response.json())
         .then(data => {
           this.data = data;
+          if (data["FileName"] == null) {
+            btn.disabled = true
+            data["FileName"] = "Not found (Error 404)"
+          }
           this.name = data["FileName"];
-          this.size = this.calculateSize(data["KiloBytes"])
+          this.size = this.calculateSize(data["KiloBytes"]);
+          this.progress = this.size;
         })
     })
   }
 
-   downloadClick() {
-
+  downloadClick() {
     const f = this.data;
-    var xhr = new XMLHttpRequest(),
-      a = document.createElement('a'), file;
-
+    const xhr = new XMLHttpRequest();
+    const a = document.createElement('a');
+    this.isDownloading = true;
     xhr.open('GET', f["URI"]);
+    xhr.responseType = 'blob';
 
-    let self = this;
-    xhr.onload = function () {
-      file = new Blob([xhr.response]);
-      a.href = window.URL.createObjectURL(file);
+    xhr.onload = () => {
+      const file = new Blob([xhr.response]);
+      const url = window.URL.createObjectURL(file);
+      a.href = url;
       a.download = f["FileName"];
       a.click();
-      self.isDownloading = true;
-     };
-     xhr.onprogress = (event) => {
-       this.progress = Math.round(event.loaded / event.total * 100)
-     }
+      window.URL.revokeObjectURL(url);
+      this.percent = "100";
+    };
+
+    xhr.onprogress = (event) => {
+      if (event.lengthComputable) {
+        this.percent = ((event.loaded / event.total) * 100)
+        this.progress = this.calculateSize(Math.round(event.loaded / 1024).toString()) + " / " + this.size;
+      }
+    };
+    xhr.onerror = () => {
+      alert("Download failed. Please try again in a minute.")
+    }
     xhr.send();
   }
+
 
   calculateSize(size: string) {
 
