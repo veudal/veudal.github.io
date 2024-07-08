@@ -1,0 +1,40 @@
+h1 {
+  font-size: 3.5rem;
+  color: var(--text);
+  font-weight: 700;
+  text-align: center;
+  padding: 3rem;
+  letter-spacing: -0.125rem;
+}
+
+p {
+  color: var(--text);
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.container {
+  display: grid;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 3rem;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 5vw;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: var(--item-bg);
+}
+
+
+
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

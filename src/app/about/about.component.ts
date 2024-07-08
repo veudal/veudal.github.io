@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './about.component.css'
 })
 export class AboutComponent {
+  ngOnInit() {
+    let theme = localStorage.getItem('theme')!;
+    document.getElementById('body')!.className = theme;
+  }
 
 }

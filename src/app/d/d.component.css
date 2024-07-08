@@ -2,9 +2,23 @@ p {
   white-space: pre-line;
 }
 
+.info {
+    color: var(--text)
+}
+
 .progress-bar {
   height: 100%;
   width: 0;
   transition: width 0.3s ease;
   background-color: #5217ff;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0);}
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+  20%, 40%, 60%, 80%, 100% { transform: translateX(10px); }
+}
+
+.shake-animation {
+  animation: shake 0.6s ease-in-out;
 }

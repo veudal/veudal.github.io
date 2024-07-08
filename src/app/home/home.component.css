@@ -1,8 +1,12 @@
 h1 {
   font-size: 3.5rem;
-  color: teal;
+  color: var(--header);
   font-weight: 700;
   letter-spacing: -0.125rem;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 main {
@@ -16,20 +20,12 @@ main {
   position: relative;
 }
 
+.uploadArea {
+    background-color: var(--bg-upload-area)
+}
+
 progress {
     background-color: red;
-}
-
-.logo {
-  width: 10rem;
-  position: absolute;
-}
-
-#accessKey {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  padding: 10px;
 }
 
 .content {
@@ -41,7 +37,7 @@ progress {
 }
 
 .content h1 {
-   margin-top: 1.75rem;
+   margin-top: 1rem;
 }
 
 .content p {
@@ -52,11 +48,27 @@ progress {
   height: 100%;
   width: 0;
   transition: width 0.3s ease;
-  background-color: #5217ff;
+  background-color: #7444ff;
 }
 
-@media (max-height: 560px) {
-  #accessKey {
-    display: none;
-  }
+.info {
+    color: var(--text)
+}
+
+.svg {
+    stroke: var(--text);
+    width: 42px;
+    height: 42px;
+}
+
+.actionAreaDiv {
+  background-color: var(--bg)
+}
+
+.progress-border-div {
+  border-color: var(--progress-border-brush);
+}
+
+.border-div {
+  border-color: var(--border-brush);
 }

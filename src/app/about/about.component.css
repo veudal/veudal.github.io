@@ -1,0 +1,9 @@
+a {
+  color: var(--links);
+  text-decoration: underline;
+}
+
+pre {
+  color: var(--text);
+  padding: 20px;
+}

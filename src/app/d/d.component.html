@@ -1,16 +1,35 @@
 <main>
-  <div class="flex flex-col items-center justify-center ml-5 h-screen">
-    <p class="text-xl font-bold text-center mb-10">Filename:<br />{{name}}</p>
-    <button id="downloadBtn" type="button"
-            [disabled]="isDownloading"
-            (click)="downloadClick()"
-            class="text-lg font-medium mt-10 border border-blue-500 px-12 py-4 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-500">
-      {{ !isDownloading ? 'DOWNLOAD' : 'DOWNLOADING...'}}
-    </button>
-
-    <div [hidden]="!isDownloading" class="rounded-2xl overflow-hidden h-6 mt-20 w-[25rem] bg-gray-300">
-      <div id="progressBar" class="progress-bar rounded-2xl" [style.width.%]="percent"></div>
+  <div id="main" class="flex flex-col items-center justify-center h-screen">
+    <div [hidden]="success" class="flex flex-col items-center ">
+      <p [hidden]="success" class="mt-4 mb-4 text-xl font-bold text-center text-red-400">{{error}}</p>
+      <div [hidden]="hidePasswordArea" class="relative items-center mb-20">
+        <input id="key" class="{{ shake ? 'shake-animation' : '' }} bg-red-100 font-bold text-lg mt-1 rounded-lg py-4 px-2 text-center border-red-500 border" placeholder="Password">
+        <button id="confirmButton" type="button"
+                (click)="confirmClick()"
+                class="ml-6 text-xl font-extrabold mt-5 border border-blue-500 px-8 py-3 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out">
+          ✓
+        </button>
+      </div>
     </div>
-    <p class="text-lg text-center mt-2">{{progress}}</p>
+    <iframe [hidden]="!previewAvailable" class="mt-4 w-[90%] h-[100%]" allowfullscreen id="iframe"></iframe>
+    <div [hidden]="!success" class="flex flex-col items-center">
+      <p class="info mt-4 text-xl font-bold text-center text-white">Filename:<br />{{name}}</p>
+      <button id="downloadBtn" type="button"
+              [disabled]="isDownloading"
+              (click)="downloadClick()"
+              class="text-lg font-medium mt-5 border border-blue-500 px-10 py-2 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-500">
+        {{ !isDownloading ? 'DOWNLOAD' : 'DOWNLOADING...'}}
+      </button>
+      <button id="cancelBtn" type="button"
+              [hidden]="!isDownloading"
+              (click)="cancelClick()"
+              class="font-medium mt-5 border border-red-500 px-12 py-2 bg-red-500 text-blue-50 rounded-lg hover:bg-red-600 ease-in-out">
+        CANCEL
+      </button>
+      <div [hidden]="!isDownloading" class="rounded-2xl overflow-hidden h-6 mt-16 w-[25rem] bg-gray-300">
+        <div id="progressBar" class="progress-bar rounded-2xl" [style.width.%]="percent"></div>
+      </div>
+      <p id="infoText" class="info text-lg text-center text-white mt-2 mb-3">{{progress}}</p>
+    </div>
   </div>
 </main>

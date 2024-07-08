@@ -1,0 +1,21 @@
+<main class="center-content">
+  <h1 class="justify-center">My files</h1>
+  <div id="main" class="flex container pb-16"></div>
+  <template id="itemTemplate">
+    <div class="item">
+      <p class="w-60 overflow-ellipsis whitespace-nowrap overflow-hidden" id="fileName">Filename:<br /></p>
+      <p id="fileSize">Size:<br /></p>
+      <p id="fileCreation">Creation date:<br /></p>
+      <p id="fileExpiration">Expires on:<br /></p>
+
+      <button id="downloadBtn" type="button"
+              class="text-lg my-1 font-bold border border-blue-500 px-8 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-500">
+        DOWNLOAD
+      </button>
+      <button id="deleteBtn" type="button"
+              class="font-bold my-1 border border-red-500 px-12 bg-red-500 text-blue-50 rounded-lg hover:bg-red-600 ease-in-out">
+        DELETE
+      </button>
+    </div>
+  </template>
+</main>

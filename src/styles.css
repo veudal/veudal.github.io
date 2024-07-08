@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.no-transition * {
+  transition: none !important;
+}
+
+* {
+  transition: 400ms;
+}
+
+.light {
+  --bg: #f8f9fa;
+  --div-bg: #f5f5f5;
+  --button-bg: #f5f5f5;
+  --text: black;
+  --links: blue;
+  --header: teal;
+  --item-bg: #e6e6e6;
+  --bg-upload-area: #eeeeef;
+  --progress-border-brush: #3d3c3c;
+  --border-brush: #e6e6e6;
+}
+
+.dark {
+  --bg: #222222;
+  --div-bg: #333;
+  --button-bg: #313338;
+  --text: #dbdbdb;
+  --links: #009dff;
+  --header: #00ffa9;
+  --item-bg: #333;
+  --bg-upload-area: #313338;
+  --progress-border-brush: #e6e6e6;
+  --border-brush: #3d3c3c;
+}
+
+body {
+  background-color: var(--bg)
+}
