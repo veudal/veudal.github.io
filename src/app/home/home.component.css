@@ -21,11 +21,11 @@ main {
 }
 
 .uploadArea {
-    background-color: var(--bg-upload-area)
+  background-color: var(--bg-upload-area)
 }
 
 progress {
-    background-color: red;
+  background-color: red;
 }
 
 .content {
@@ -36,13 +36,13 @@ progress {
   margin-bottom: 3rem;
 }
 
-.content h1 {
-   margin-top: 1rem;
-}
+  .content h1 {
+    margin-top: 1rem;
+  }
 
-.content p {
+  .content p {
     margin-top: 1.5rem;
-}
+  }
 
 .progress-bar {
   height: 100%;
@@ -52,13 +52,13 @@ progress {
 }
 
 .info {
-    color: var(--text)
+  color: var(--text)
 }
 
 .svg {
-    stroke: var(--text);
-    width: 42px;
-    height: 42px;
+  stroke: var(--text);
+  width: 42px;
+  height: 42px;
 }
 
 .actionAreaDiv {

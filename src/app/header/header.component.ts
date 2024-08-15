@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -19,13 +20,13 @@ export class HeaderComponent implements OnInit {
 
     this.theme = localStorage.getItem('theme')!;
     this.src = "assets/" + this.theme + "-logo.png";
-    document.getElementById('body')!.className = this.theme;
+    document.body.className = this.theme;
     this.updateThemeSymbol();
   }
 
   public themeToggle() {
 
-    const body = document.getElementById('body')!;
+    const body = document.body;
     body.classList.toggle("dark");
     body.classList.toggle("light");
     localStorage.setItem('theme', body.classList[0])
@@ -37,8 +38,7 @@ export class HeaderComponent implements OnInit {
 
     const sunElement = document.getElementById('sun')!;
     const moonElement = document.getElementById('moon')!;
-    const body = document.getElementById('body')!;
-    if (body.classList.contains('light')) {
+    if (document.body.classList.contains('light')) {
       sunElement.style.display = 'block';
       moonElement.style.display = 'none';
     } else {

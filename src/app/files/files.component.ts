@@ -16,8 +16,7 @@ export class FilesComponent {
 
 
   ngOnInit() {
-
-    let deletionIndexes = [];
+    let validItems = [];
 
     const template = document.getElementById('itemTemplate') as HTMLTemplateElement;
     const container = document.getElementById('main');
@@ -34,18 +33,22 @@ export class FilesComponent {
         if (fileName && fileSize && fileCreation && fileExpiration) {
 
           const creationDate = new Date(arr[i]["Date"]);
-          const expirationDate = new Date();
-          expirationDate.setDate(creationDate.getDate() + arr[i]["Expiration"]);
+          let expirationDate = new Date(creationDate);
+          expirationDate.setDate(expirationDate.getDate() + arr[i]["Expiration"]);
+
+          if (Date.now() > expirationDate.getTime()) {
+            continue;
+          }
 
           fileName.innerHTML += arr[i]["FileName"]
           fileSize.innerHTML += this.calculateSize(arr[i]["KiloBytes"])
           fileCreation.innerHTML += creationDate.toLocaleDateString()
-          fileExpiration.innerHTML += expirationDate.toLocaleDateString();
+          expirationDate.setDate(expirationDate.getDate() - 1)
+          fileExpiration.innerHTML += expirationDate.toLocaleDateString()
 
-          if (Date.now() > expirationDate.getTime()) {
-            deletionIndexes.push(i);
-            continue;
-          }
+
+
+          validItems.push(arr[i]);
         }
 
         const downloadBtn = item.getElementById("downloadBtn")
@@ -61,11 +64,8 @@ export class FilesComponent {
         }
         container.appendChild(item);
       }
-      if (deletionIndexes.length > 0) {
-        for (var i = 0; i < deletionIndexes.length; i++) {
-          arr.splice(i, 1);
-        }
-        localStorage.setItem("filesMetadata", JSON.stringify(arr))
+      if (validItems.length != arr.length) {
+        localStorage.setItem("filesMetadata", JSON.stringify(validItems))
       }
     }
   }
@@ -87,6 +87,7 @@ export class FilesComponent {
         response => {
           if (!response) {
             alert("File could not be deleted.")
+
             return;
           }
           const meta = localStorage.getItem("filesMetadata")

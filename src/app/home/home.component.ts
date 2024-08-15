@@ -14,7 +14,7 @@ export class HomeComponent {
 
   ngOnInit() {
     let theme = localStorage.getItem('theme')!;
-    document.getElementById('body')!.className = theme;
+    document.body.className = theme;
   }
 
   constructor(private router: Router) { }
