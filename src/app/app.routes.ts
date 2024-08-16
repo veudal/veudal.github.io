@@ -11,8 +11,8 @@ export const routes: Routes = [
   { path: "d/:guid", component: DComponent },
   { path: "about", component: AboutComponent },
   { path: "files", component: FilesComponent },
-  { path: "key", component: KeyComponent },
-  { path: '**', redirectTo: '' }
+  { path: "key", component: KeyComponent } 
+//, { path: '**', redirectTo: '' }
 
 ];
 
